@@ -20,6 +20,7 @@ public class FragmentUtils {
 		private final FragmentActivity activity;
 		private       int              containerId;
 		private boolean shouldAddToBackStack = true;
+		private String  backStackTag         = null;
 		private int     enterAnimation       = 0;
 		private int     exitAnimation        = 0;
 		private int     popEnterAnimation    = 0;
@@ -39,6 +40,12 @@ public class FragmentUtils {
 			return this;
 		}
 
+		public FragmentBuilder addToBackStack (boolean shouldAddToBackStack, String backStackTag) {
+			this.shouldAddToBackStack = shouldAddToBackStack;
+			this.backStackTag = backStackTag;
+			return this;
+		}
+
 		public FragmentBuilder setAnimations (int enter, int exit, int popEnter, int popExit) {
 			this.enterAnimation = enter;
 			this.exitAnimation = exit;
@@ -53,7 +60,7 @@ public class FragmentUtils {
 					.setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
 							popExitAnimation );
 			ft.add( containerId, fragment, tag );
-			if (shouldAddToBackStack) ft.addToBackStack( null );
+			if (shouldAddToBackStack) ft.addToBackStack( backStackTag );
 			ft.commit();
 		}
 
@@ -63,7 +70,7 @@ public class FragmentUtils {
 							.setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
 									popExitAnimation );
 			ft.replace( containerId, fragment, tag );
-			if (shouldAddToBackStack) ft.addToBackStack( null );
+			if (shouldAddToBackStack) ft.addToBackStack( backStackTag );
 			ft.commit();
 		}
 	}
