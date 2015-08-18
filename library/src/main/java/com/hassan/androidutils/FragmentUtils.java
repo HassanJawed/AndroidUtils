@@ -1,5 +1,6 @@
 package com.hassan.androidutils;
 
+import android.app.Activity;
 import android.support.v4.app.*;
 
 /**
@@ -13,6 +14,15 @@ public class FragmentUtils {
 
 	public static FragmentBuilder createBuilder (FragmentActivity activity) {
 		return new FragmentBuilder( activity );
+	}
+
+	public static <T> T castActivity (Activity activity, Class<?> clas) {
+		if (clas.isInstance( activity )) {
+			return (T) activity;
+		} else {
+			throw new IllegalStateException(
+					activity.getLocalClassName() + " must implement " + clas.getCanonicalName() );
+		}
 	}
 
 	public static class FragmentBuilder {
@@ -56,9 +66,9 @@ public class FragmentUtils {
 
 		public void add (Fragment fragment, String tag) {
 			FragmentTransaction ft = activity.getSupportFragmentManager()
-					.beginTransaction()
-					.setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
-							popExitAnimation );
+											 .beginTransaction()
+											 .setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
+													 popExitAnimation );
 			ft.add( containerId, fragment, tag );
 			if (shouldAddToBackStack) ft.addToBackStack( backStackTag );
 			ft.commit();

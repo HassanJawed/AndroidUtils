@@ -20,7 +20,7 @@ public class TextUtils {
 		return string == null || string.length() == 0;
 	}
 
-	public static String getText (EditText editText) {
-		return editText == null ? EMPTY : emptyIfNull( editText.getText() ).toString();
+	public static String getText (TextView textView) {
+		return textView == null ? EMPTY : emptyIfNull( textView.getText() ).toString();
 	}
 }
