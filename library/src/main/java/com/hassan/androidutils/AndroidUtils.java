@@ -7,6 +7,7 @@ import android.content.pm.*;
 import android.net.*;
 import android.util.Base64;
 import android.util.Log;
+import android.view.inputmethod.*;
 import android.widget.*;
 
 import java.security.MessageDigest;
@@ -19,6 +20,12 @@ import java.security.NoSuchAlgorithmException;
  * @date 12/19/2014
  */
 public class AndroidUtils {
+
+	public static void closeKeyboard (Activity activity) {
+		InputMethodManager inputMethodManager =
+				(InputMethodManager) activity.getSystemService( Context.INPUT_METHOD_SERVICE );
+		inputMethodManager.hideSoftInputFromWindow( activity.getWindow().getDecorView().getWindowToken(), 0 );
+	}
 
 	public static void startActivityForUrl (Context context, String url) {
 		Intent i = new Intent( Intent.ACTION_VIEW );

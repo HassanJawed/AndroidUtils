@@ -64,11 +64,16 @@ public class FragmentUtils {
 			return this;
 		}
 
+		public FragmentBuilder closeKeyboard () {
+			AndroidUtils.closeKeyboard( activity );
+			return this;
+		}
+
 		public void add (Fragment fragment, String tag) {
 			FragmentTransaction ft = activity.getSupportFragmentManager()
 											 .beginTransaction()
 											 .setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
-													 popExitAnimation );
+																   popExitAnimation );
 			ft.add( containerId, fragment, tag );
 			if (shouldAddToBackStack) ft.addToBackStack( backStackTag );
 			ft.commit();
@@ -78,7 +83,7 @@ public class FragmentUtils {
 			FragmentTransaction ft =
 					activity.getSupportFragmentManager().beginTransaction()
 							.setCustomAnimations( enterAnimation, exitAnimation, popEnterAnimation,
-									popExitAnimation );
+												  popExitAnimation );
 			ft.replace( containerId, fragment, tag );
 			if (shouldAddToBackStack) ft.addToBackStack( backStackTag );
 			ft.commit();
