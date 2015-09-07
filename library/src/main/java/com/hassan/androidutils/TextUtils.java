@@ -20,6 +20,10 @@ public class TextUtils {
 		return string == null || string.length() == 0;
 	}
 
+	public static boolean isEmpty (CharSequence string) {
+		return string == null || string.length() == 0;
+	}
+
 	public static String getText (TextView textView) {
 		return textView == null ? EMPTY : emptyIfNull( textView.getText() ).toString();
 	}

@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.*;
 import android.content.pm.*;
+import android.graphics.Bitmap;
 import android.net.*;
 import android.util.Base64;
 import android.util.Log;
 import android.view.inputmethod.*;
 import android.widget.*;
 
+import java.io.ByteArrayOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -20,6 +22,13 @@ import java.security.NoSuchAlgorithmException;
  * @date 12/19/2014
  */
 public class AndroidUtils {
+
+	public static String toBase64String (Bitmap bitmap) {
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress( Bitmap.CompressFormat.JPEG, 60, stream );
+		byte[] byteArray = stream.toByteArray();
+		return Base64.encodeToString( byteArray, Base64.DEFAULT );
+	}
 
 	public static void closeKeyboard (Activity activity) {
 		InputMethodManager inputMethodManager =
